@@ -12,8 +12,13 @@ class Job extends Model
 
     protected $fillable = ['title', 'salary']; //mass assignment
 
+    public function employer(){
+        return $this->belongsTo(Employer::class);
+    }
 
-
+    public function tags(){
+        return $this->belongsToMany(Tag::class, foreignPivotKey: "job_listing_id"); //since we aren't using laravel's default table jobs
+    }
 
 
 
