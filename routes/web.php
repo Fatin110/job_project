@@ -15,7 +15,9 @@ Route::get('/', function () {
 });
 
 Route::get('/jobs', function () {
-    return view('jobs', ['jobs' => Job::all()]);
+    $jobs = Job::with('employer')->get(); //eager loading (for each job, get me the employer with it)
+
+    return view('jobs', data: ['jobs' => $jobs]);
 });
 
 Route::get('/jobs/{id}', function ($id) {
